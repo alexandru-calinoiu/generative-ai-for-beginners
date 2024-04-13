@@ -9,7 +9,7 @@ dotenv.load_dotenv()
 client = AzureOpenAI(
   azure_endpoint = os.environ["AZURE_OPENAI_ENDPOINT"], 
   api_key=os.environ['AZURE_OPENAI_KEY'],  
-  api_version = "2023-10-01-preview"
+  api_version = "2023-05-15"
   )
 
 deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
@@ -18,7 +18,7 @@ deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
 prompt = "Complete the following: Once upon a time there was a"
 messages = [{"role": "user", "content": prompt}]  
 # make completion
-completion = client.chat.completions.create(model=deployment, messages=messages)
+completion = client.chat.completions.create(model=deployment, messages=messages, max_tokens=600)
 
 # print response
 print(completion.choices[0].message.content)
